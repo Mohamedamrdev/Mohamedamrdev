@@ -35,7 +35,9 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        $items = Item::all();
+        $tags = Tag::all();
+        return view('home',['tags' => $tags, 'items' => $items]);
     }
 
     public function adduser()
@@ -93,7 +95,9 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('index');
+        $items = Item::all();
+        $tags = Tag::all();
+        return view('index',['tags' => $tags, 'items' => $items]);
     }
 
     public function booktable()
@@ -122,8 +126,4 @@ class HomeController extends Controller
         return view('viewbook', ['books' => $books]);
     }
 
-    public function card()
-    {
-        return view ('card');
-    }
 }

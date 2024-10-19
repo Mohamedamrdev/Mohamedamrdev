@@ -419,7 +419,7 @@
 
     <!-- food section -->
 
-    <section class="food_section layout_padding-bottom">
+    <section class="food_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
                 <h2>
@@ -427,225 +427,44 @@
                 </h2>
             </div>
 
-            <ul class="filters_menu">
+            {{-- <ul class="filters_menu">
                 <li class="active" data-filter="*">All</li>
-                <li data-filter=".burger">Burger</li>
-                <li data-filter=".pizza">Pizza</li>
-                <li data-filter=".pasta">Pasta</li>
-                <li data-filter=".fries">Fries</li>
-            </ul>
-
+                @foreach ($tags as $tag)
+                    <li data-filter=".tag-{{ $tag->id }}">{{ $tag->title }}</li>
+                @endforeach
+            </ul> --}}
+{{-- 
             <div class="filters-content">
                 <div class="grid row">
-                    <div class="col-sm-6 col-lg-4 all pizza">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f1.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Delicious Pizza
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $20
-                                        </h6>
+                    @foreach ($items as $item)
+                        <div class="col-sm-6 col-lg-4 all tag-{{ $item->tag_id }}">
+                            <div class="box">
+                                <div>
+                                    <div class="img-box">
+                                        <img src="{{ asset('images/' . $item->image) }}" alt="">
+                                    </div>
+                                    <div class="detail-box">
+                                        <h5>{{ $item->title }}</h5>
+                                        <p>{{ $item->dimension }}</p>
+                                        <div class="options">
+                                            <h6>${{ $item->price }}</h6>
+                                            <a href="#">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart">
+                                                    <circle cx="9" cy="21" r="1"/>
+                                                    <circle cx="20" cy="21" r="1"/>
+                                                    <path d="M2 2h4l1 7h11l1-7h4"/>
+                                                    <path d="M5 8h14l-1.5 6H6.5L5 8z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all burger">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f2.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Delicious Burger
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $15
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pizza">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f3.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Delicious Pizza
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $17
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pasta">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f4.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Delicious Pasta
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $18
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all fries">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f5.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        French Fries
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $10
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pizza">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f6.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Delicious Pizza
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $15
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all burger">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f7.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Tasty Burger
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $12
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all burger">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f8.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Tasty Burger
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $14
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4 all pasta">
-                        <div class="box">
-                            <div>
-                                <div class="img-box">
-                                    <img src="images/f9.png" alt="">
-                                </div>
-                                <div class="detail-box">
-                                    <h5>
-                                        Delicious Pasta
-                                    </h5>
-                                    <p>
-                                        Veniam debitis quaerat officiis quasi cupiditate quo, quisquam velit, magnam
-                                        voluptatem repellendus sed eaque
-                                    </p>
-                                    <div class="options">
-                                        <h6>
-                                            $10
-                                        </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach --}}
                 </div>
             </div>
+
             <div class="btn-box">
                 <a href="">
                     View More
@@ -653,6 +472,77 @@
             </div>
         </div>
     </section>
+
+    <!-- Footer section -->
+    <footer class="footer_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <h4>Contact Us</h4>
+                    <div class="contact_link_box">
+                        <a href="">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                            <span>Location</span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            <span>Call +01 1234567890</span>
+                        </a>
+                        <a href="">
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            <span>demo@gmail.com</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <a href="#" class="footer-logo">Feane</a>
+                    <p>Necessary, making this the first true generator on the Internet...</p>
+                    <div class="footer_social">
+                        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <a href=""><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <h4>Opening Hours</h4>
+                    <p>Everyday</p>
+                    <p>10.00 Am -10.00 Pm</p>
+                </div>
+            </div>
+            <div class="footer-info">
+                <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a
+                        href="https://html.design/">Free Html Templates</a><br><br>
+                    &copy; <span id="displayYear"></span> Distributed By <a
+                        href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- إضافة jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // عند الضغط على عنصر في قائمة التصفية
+            $('.filters_menu li').on('click', function() {
+                var filterValue = $(this).attr('data-filter');
+                // تغيير الفئة النشطة
+                $('.filters_menu li').removeClass('active');
+                $(this).addClass('active');
+
+                // تصفية العناصر
+                $('.grid .col-sm-6').hide(); // إخفاء جميع العناصر
+                if (filterValue === '*') {
+                    $('.grid .col-sm-6').show(); // إظهار جميع العناصر إذا تم اختيار "كل"
+                } else {
+                    $('.grid .col-sm-6' + filterValue).show(); // إظهار العناصر التي تطابق الفئة المختارة
+                }
+            });
+        });
+    </script>
+
 
     <!-- end food section -->
 

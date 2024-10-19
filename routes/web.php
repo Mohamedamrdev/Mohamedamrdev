@@ -34,7 +34,6 @@ Route::get('/books', [App\Http\Controllers\HomeController::class, 'booklist'])->
 
 Route::POST('/viewbook', [App\Http\Controllers\HomeController::class, 'search'])->name('search');
 
-Route::GET('/card',[App\Http\Controllers\HomeController::class, 'card'])->name('card');
 
 
 // web site //
@@ -42,12 +41,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name(
 Route::get('/booktable', [App\Http\Controllers\HomeController::class, 'booktable'])->name('booktable');
 Route::get('/menu', [App\Http\Controllers\HomeController::class, 'menu'])->name('menu');
 Route::get('/about', [App\Http\Controllers\HomeController::class, 'about'])->name('about');
+Route::get('/cart', [App\Http\Controllers\CartController::class, 'index'])->name('card');
 
 //store data
 Route::POST('/adduser/store', [App\Http\Controllers\UserController::class, 'store'])->name('storeadduser');
 Route::POST('/addCategory/store', [App\Http\Controllers\TagController::class, 'store'])->name('storetag');
 Route::POST('/additem/store', [App\Http\Controllers\ItemController::class, 'store'])->name('storeitem');
 Route::POST('book/store', [App\Http\Controllers\BookController::class, 'store'])->name('storebook');
+Route::POST('cart/add', [App\Http\Controllers\CartController::class, 'addToCart'])->name('cart.add');
 
 
 //edit
@@ -58,3 +59,11 @@ Route::GET('/categories/editCategory', [App\Http\Controllers\TagController::clas
 
 //update
 Route::PUT('/users/{id}/update',[App\Http\Controllers\UserController::class, 'Update'])->name('user.update');
+Route::put('cart/update/{itemId}', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+
+
+
+
+
+//destroy
+Route::delete('cart/remove/{itemId}', [App\Http\Controllers\CartController::class, 'destroy'])->name('cart.destroy');
