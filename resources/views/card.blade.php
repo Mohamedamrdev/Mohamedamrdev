@@ -69,7 +69,6 @@
                         <span class="font-semibold">${{ Cart::getTotal() }}</span>
                     </div>
 
-                    <!-- زر داخل مستطيل أزرق -->
                     <div class="h-20 p-4 bg-blue-600 rounded-lg">
                         <button class="w-full px-4 py-2 text-zinc-950bg-blbue-600 text- hover:bg-blue-700">
                             Proceed to Checkout
