@@ -68,3 +68,58 @@ $(".client_owl-carousel").owlCarousel({
         }
     }
 });
+
+
+
+$(document).ready(function() {
+    // عند الضغط على عنصر في قائمة التصفية
+    $('.filters_menu li').on('click', function() {
+        var filterValue = $(this).attr('data-filter');
+        // تغيير الفئة النشطة
+        $('.filters_menu li').removeClass('active');
+        $(this).addClass('active');
+
+        // تصفية العناصر
+        $('.grid .col-sm-6').hide(); // إخفاء جميع العناصر
+        if (filterValue === '*') {
+            $('.grid .col-sm-6').show(); // إظهار جميع العناصر إذا تم اختيار "كل"
+        } else {
+            $('.grid .col-sm-6' + filterValue).show(); // إظهار العناصر التي تطابق الفئة المختارة
+        }
+    });
+});
+
+
+
+document.querySelectorAll('.quantity-increase').forEach(button => {
+    button.addEventListener('click', function() {
+        const input = this.previousElementSibling;
+        input.value = parseInt(input.value) + 1;
+    });
+});
+
+document.querySelectorAll('.quantity-decrease').forEach(button => {
+    button.addEventListener('click', function() {
+        const input = this.nextElementSibling;
+        if (input.value > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    });
+});
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const quantityInputs = document.querySelectorAll('input[name="quantity"]');
+
+        quantityInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const form = this.closest('form');
+                form.submit(); // إرسال النموذج تلقائيًا عند تغيير القيمة
+            });
+        });
+    });
+    // $(document).ready(function() {
+    //     $('#datatable').DataTable({
+    //         searching: false // This will disable the search box
+    //     });
+    // });
+

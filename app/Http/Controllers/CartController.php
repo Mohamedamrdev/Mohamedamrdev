@@ -1,107 +1,152 @@
 <?php
-
 namespace App\Http\Controllers;
+
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use Illuminate\Http\Request;
-use App\Models\Tag;
+use App\Models\CartItem;
 use App\Models\Item;
-use App\Models\User;
-use Illuminate\Support\Facades\Session;
+use App\Models\Order; // افترض أنك ستسجل الطلبات في نموذج Order
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+
     /**
-     * Display a listing of the resource.
+     * Display a listing of the cart items.
      */
     public function index()
     {
-        $cartItems = Cart::getContent();; 
-        return view('card', compact('cartItems'));
+        // الحصول على محتويات السلة
+        $cartItems = Cart::getContent();
+
+        // تحقق إذا كانت السلة فارغة
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('menu')->with('message', 'Your cart is empty.');
+        }
+
+        // الحصول على إجمالي السلة
+        $cartTotal = session('cart_total', 0); // استخدم ما تحتاجه لحساب الإجمالي
+
+        return view('cart', [
+            'cartItems' => $cartItems,
+            'cartTotal' => $cartTotal,
+        ]);
     }
 
+    /**
+     * Add an item to the cart.
+     */
+    public function addToCart(Request $request) {
+        // استرجاع البيانات من الطلب
+        $itemId = $request->input('item_id');
+        $quantity = $request->input('quantity');
+        $price = $request->input('price');
 
-    public function addToCart(Request $request)
-    {
+        // استرجاع اسم العنصر والصورة من قاعدة البيانات
+        $item = Item::find($itemId);
 
-        $request->validate([
-            'item_id' => 'required|integer',
-            'title' => 'required|string',
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer|min:1',
-        ]);
-
-        // الحصول على الكمية من الطلب
-        $quantity = $request->input('quantity', 1);
-
-        // إضافة العنصر إلى السلة
         Cart::add([
-            'id' => $request->item_id,
-            'name' => $request->title,
-            'price' => $request->price,
+            'id' => $itemId,
+            'name' => $item->title, // استخدم 'name' بدلاً من 'title'
             'quantity' => $quantity,
+            'price' => $price,
+            'attributes' => [
+            'image' => $item->image,
+            ],
         ]);
+        // تحديث الإجمالي
+        $this->updateTotal();
 
-        return redirect()->route('card');
+        return redirect()->route('cart')->with('success', 'Item added to cart successfully!');
     }
+
     /**
-     * Show the form for creating a new resource.
+     * Update the total price of the cart.
      */
-    public function create()
+    public function updateTotal()
     {
-        //
+        $cartItems = Cart::getContent(); // جلب محتويات السلة
+        $total = 0;
+
+        // حساب إجمالي السعر بناءً على الكمية والسعر لكل عنصر
+        foreach ($cartItems as $item) {
+            $total += $item->quantity * $item->price;
+        }
+
+        // يمكنك حفظ الإجمالي في الجلسة أو قاعدة البيانات إذا كنت بحاجة لذلك
+        session(['cart_total' => $total]);
+
+        return $total;
     }
 
-
     /**
-     * Store a newly created resource in storage.
+     * Update the quantity of an item in the cart.
      */
-    public function store(Request $request)
+    public function updateCart(Request $request)
     {
-        //
+        // الحصول على العنصر في السلة
+        $cartItem = Cart::get($request->item_id);
+
+        if ($cartItem) {
+            // تحديث كمية العنصر في السلة بناءً على الكمية الحالية
+            Cart::update($request->item_id, [
+                'quantity' => [
+                    'relative' => false,
+                    'value' => $request->quantity,
+                ],
+            ]);
+
+            // تحديث الإجمالي
+            $this->updateTotal();
+
+            return redirect()->route('cart')->with('success', 'Item quantity updated successfully!');
+        }
+
+        return redirect()->route('cart')->with('error', 'Item not found in cart.');
     }
 
     /**
-     * Display the specified resource.
+     * Remove an item from the cart.
      */
-    public function show(string $id)
+    public function removeFromCart($itemId)
     {
-        //
+        // إزالة العنصر من السلة
+        Cart::remove($itemId);
+
+        // تحديث الإجمالي بعد الحذف
+        $this->updateTotal();
+
+        return redirect()->route('cart')->with('success', 'Item removed successfully!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
+   /**
+ * Process the order and clear the cart.
+ */
+public function checkout(Request $request)
+{
+    // تحقق من صحة البيانات
+    $request->validate([
+        // حقول التحقق
+    ]);
+
+    // تسجيل الطلب
+    $order = Order::create([
+        'user_id' => Auth::id(),
+        'total' => session('cart_total'),
+        // أضف أي حقول أخرى تحتاجها
+    ]);
+
+    // تأكد من أنه تم تسجيل الطلب بنجاح
+    if ($order) {
+        // مسح السلة
+        Cart::clear();
+        session()->forget('cart_total');
+
+        return redirect()->route('menu')->with('success', 'Order placed successfully, and the cart has been cleared!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    // public function update(Request $request, $itemId)
-    // {
-    //     $cart = session()->get('cart', []);
-
-    //     if(isset($cart[$itemId])) {
-    //         if($request->input('action') === 'increment') {
-    //             $cart[$itemId]['quantity']++;
-    //         } elseif($request->input('action') === 'decrement' && $cart[$itemId]['quantity'] > 1) {
-    //             $cart[$itemId]['quantity']--;
-    //         }
-    //     }
-
-    //     session()->put('cart', $cart);
-    //     return redirect()->route('card');
-    // }
-
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    return redirect()->route('cart')->with('error', 'Failed to place the order.');
 }
 
+}

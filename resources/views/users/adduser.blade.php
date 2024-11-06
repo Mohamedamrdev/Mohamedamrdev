@@ -44,7 +44,7 @@
 					<div class="clearfix"></div>
 
 					<!-- menu profile quick info -->
-					<div class="profile clearfix">
+					<div class="clearfix profile">
 						<div class="profile_pic">
 							<img src="images/img.jpg" alt="..." class="img-circle profile_img">
 						</div>
@@ -57,46 +57,58 @@
 
 					<br />
 
-					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>General</h3>
-							<ul class="nav side-menu">
-								<!-- Users Section -->
-								<li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('userlist')}}>Users List</a></li>
-										<li><a href={{route('adduser')}}>Add User</a></li>
-									</ul>
-								</li>
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <!-- Users Section -->
+            <li>
+                <a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('userlist') }}">Users List</a></li>
+                    <li><a href="{{ route('adduser') }}">Add User</a></li>
+                </ul>
+            </li>
 
-								<!-- Tags Section -->
-								<li><a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('addCategory')}}>Add Tag</a></li>
-										<li><a href={{route('categorieslist')}}>Tags List</a></li>
-									</ul>
-								</li>
+            <!-- Tags Section -->
+            <li>
+                <a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('addCategory') }}">Add Tag</a></li>
+                    <li><a href="{{ route('categorieslist') }}">Tags List</a></li>
+                </ul>
+            </li>
 
-								<!-- Items Section -->
-								<li><a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('additem')}}>Add Item</a></li>
-										<li><a href={{route('items')}}>Items List</a></li>
-									</ul>
-								</li>
+            <!-- Items Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('additem') }}">Add Item</a></li>
+                    <li><a href="{{ route('items') }}">Items List</a></li>
+                </ul>
+            </li>
 
-								<!-- Books Section (New Section) -->
-								<li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										 <li><a href={{route('booklist')}}>Books List</a></li>
+            <!-- Books Section -->
+            <li>
+                <a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('booklist') }}">Books List</a></li>
+                </ul>
+            </li>
 
-									</ul>
-								</li>
-							</ul>
-						</div>
-					  </div>
-					<!-- /sidebar menu -->
+            <!-- Orders Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Orders <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('orderlist') }}">Order List</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /sidebar menu -->
+
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
@@ -219,7 +231,7 @@
 						</div>
 
 						<div class="title_right">
-							<div class="col-md-5 col-sm-5  form-group pull-right top_search">
+							<div class="col-md-5 col-sm-5 form-group pull-right top_search">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Search for...">
 									<span class="input-group-btn">
@@ -285,6 +297,27 @@
 												<input id="email" class="form-control" type="email" name="email" required="required">
 											</div>
 										</div>
+
+                                        <div class="item form-group">
+											<label for="role" class="col-form-label col-md-3 col-sm-3 label-align">Role <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                    <select name="role" id="role" class="form-control">
+                                                        <option value="user">User</option>
+                                                        <option value="admin">Admin</option>
+                                                    </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="item form-group">
+                                            <label for="phone_number" class="col-form-label col-md-3 col-sm-3 label-align">Phone Number</label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                        <input type="tel" id="phone_number" name="phone_number" required class="w-full p-2 mt-1 border border-gray-300 rounded" value="{{ old('phone_number') }}">
+                                                        @error('phone_number')
+                                                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    </div>
+
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
 											<div class="checkbox">

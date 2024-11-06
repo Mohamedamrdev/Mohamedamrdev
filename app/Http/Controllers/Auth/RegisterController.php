@@ -1,12 +1,17 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WelcomeEmail;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\UserRegistered;
+
+
 
 class RegisterController extends Controller
 {
@@ -28,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/users';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
@@ -51,7 +56,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone_number' => 'required|regex:/^01[0-2,5][0-9]{8}$/',
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => 'user',
+
         ]);
     }
 
@@ -63,10 +71,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+
+        // إنشاء المستخدم
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone_number' => $data['phone_number'],
             'password' => Hash::make($data['password']),
         ]);
+
+        // إرسال رسالة ترحيب بعد إنشاء المستخدم
+        Mail::to($user->email)->send(new WelcomeEmail($user));
+        
+        // Notification::send($user, new UserRegistered($user));
+
+        return $user;
     }
 }

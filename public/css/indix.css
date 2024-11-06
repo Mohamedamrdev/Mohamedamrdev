@@ -1,0 +1,22 @@
+
+.btn_box {
+    text-align: center; /* لتوسيط الزر داخل الصندوق */
+    margin-top: 20px;
+}
+.book-now-btn {
+    background-color: #ffbe33; /* لون خلفية الزر */
+    color: #fff; /* لون النص */
+    padding: 10px 20px; /* مسافات داخلية لتكبير الزر */
+    border: none; /* إزالة الحدود */
+    border-radius: 5px; /* حواف دائرية */
+    font-size: 16px; /* حجم الخط */
+    cursor: pointer; /* تغيير المؤشر عند المرور على الزر */
+
+    transition: background-color 0.3s ease; /* تأثير الانتقال عند تغيير اللون */
+margin: 20px;
+
+}
+
+.book-now-btn:hover {
+    background-color: #b3aa00; /* لون الخلفية عند تمرير الفأرة */
+}

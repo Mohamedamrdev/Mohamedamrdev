@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Tag;
 use App\Models\Item;
 use App\Models\Book;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class HomeController extends Controller
@@ -33,6 +35,12 @@ class HomeController extends Controller
         return view('order');
     }
 
+    public function admin()
+    {
+        $users = User::all();
+        return view ('users.users', ['users' => $users]);
+    }
+
     public function index()
     {
         $items = Item::all();
@@ -47,8 +55,9 @@ class HomeController extends Controller
 
     public function userlist()
     {
+        // dd('Reached userlist method');
         $users = User::all();
-        return view('users.users', ['users' => $users]);;
+        return view('users.users', ['users' => $users]);
     }
 
     public function addCategory()
@@ -125,5 +134,13 @@ class HomeController extends Controller
 
         return view('viewbook', ['books' => $books]);
     }
+
+    public function profile()
+{
+    $user = Auth::user(); // Get the current authenticated user
+    $orders = $user->orders; // Fetch the user's orders
+
+    return view('profile', compact('user', 'orders')); // Return the profile view with user data
+}
 
 }

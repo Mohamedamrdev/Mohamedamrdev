@@ -1,0 +1,118 @@
+body {
+    background-color: #f9f9f9; /* خلفية خفيفة */
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    background-color: #FFD700; /* لون أصفر */
+    padding: 1.5rem;
+    text-align: center;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 2rem; /* Larger font for clarity */
+}
+
+.table-header {
+    background-color: #FFE135; /* لون أصفر فاتح */
+    text-align: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Merge borders */
+    border-spacing: 0 15px; /* Adds more space between rows */
+}
+
+th, td {
+    padding: 16px; /* زيادة الـ padding */
+    border-bottom: 1px solid #ddd; /* Border for clarity */
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: left;
+}
+
+th {
+    background-color: #FFC107; /* Header background */
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Highlight row on hover */
+}
+
+img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for images */
+}
+
+.btn-primary {
+    background-color: #FFC107; /* لون أصفر للزر */
+    color: white;
+    padding: 0.5rem 1rem; /* Padding for better click area */
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    margin-right: 10px; /* توسيع المسافة بين الأزرار */
+}
+
+.btn-primary:hover {
+    background-color: #FFB300; /* لون أغمق عند التحويم */
+}
+
+.btn-primary:active {
+    transform: scale(0.98); /* Slightly shrink the button on click */
+}
+
+.btn-danger {
+    background-color: #DC3545; /* لون أحمر */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #C82333; /* لون أغمق عند التحويم */
+}
+
+.btn-danger:active {
+    transform: scale(0.98); /* Slightly shrink the button on click */
+}
+
+.summary-card {
+    padding: 2rem; /* زيادة المسافة داخل البطاقة */
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for the summary card */
+    width: 80%; /* Optional, adjust width if needed */
+    margin: 0 auto; /* Center the summary card */
+}
+
+.checkout-btn {
+    background-color: #FFD700;
+    color: white;
+    font-size: 1.2rem; /* Larger font */
+    padding: 1rem 2.5rem; /* زيادة المسافة داخل الزر */
+    text-align: center;
+    border-radius: 8px;
+    display: inline-block;
+    width: 100%;
+    margin-top: 1.5rem; /* توسيع المسافة من الأعلى */
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #FFB300;
+}
+
+.summary-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.summary-card p {
+    margin-bottom: 1rem; /* توسيع المسافة بين الفقرات */
+}

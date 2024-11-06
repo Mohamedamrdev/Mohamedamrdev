@@ -16,12 +16,29 @@ class TagController extends Controller
         $tag = new Tag();
         $tag->title = $validatedData['tag'];
         $tag->save();
-        return "success";
+        return 'suceess';
     }
 
-    public function edit(Tag $Tag)
+    public function edit($id)
     {
-        return view('categories.editCategory', compact('Tag'));
+        $tag = Tag::findOrFail($id); 
+        return view('categories.editCategory', ['tags' => $tag]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        // تحقق من صحة البيانات
+        $validatedData = $request->validate([
+            'tag' => 'required|string|max:255',
+        ]);
+
+        // ابحث عن السجل بواسطة ID
+        $tag = Tag::findOrFail($id);
+        // قم بتحديث البيانات
+        $tag->title = $validatedData['tag'];
+        $tag->save();
+        // إعادة توجيه مع رسالة نجاح
+        return redirect()->route('tag.edit', $id)->with('success', 'تم تحديث التصنيف بنجاح!');
     }
 
 }

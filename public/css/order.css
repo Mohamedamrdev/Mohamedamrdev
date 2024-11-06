@@ -1,0 +1,97 @@
+/* Custom styles for orders page */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    text-align: center;
+    font-size: 2em;
+    margin: 20px 0;
+}
+
+.summary-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.summary-card h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.checkout-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d8ac13;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #b49311;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+.footer_section {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+}
+
+.footer_section a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer_section .footer-logo {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.footer_social a {
+    margin: 0 10px;
+    color: #fff;
+    transition: color 0.3s;
+}
+
+.footer_social a:hover {
+    color: #d8ac13;
+}
+
+.remove{
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.remove:active{
+    background-color: #fcb40c; /* لون الخلفية عند الضغط */
+    box-shadow: 0 2px #666;
+    transform: translateY(4px); /* لتأثير الضغط */
+}

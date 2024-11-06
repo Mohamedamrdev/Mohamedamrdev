@@ -57,46 +57,58 @@
 
 					<br />
 
-					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>General</h3>
-							<ul class="nav side-menu">
-								<!-- Users Section -->
-								<li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('userlist')}}>Users List</a></li>
-										<li><a href={{route('adduser')}}>Add User</a></li>
-									</ul>
-								</li>
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <!-- Users Section -->
+            <li>
+                <a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('userlist') }}">Users List</a></li>
+                    <li><a href="{{ route('adduser') }}">Add User</a></li>
+                </ul>
+            </li>
 
-								<!-- Tags Section -->
-								<li><a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('addCategory')}}>Add Tag</a></li>
-										<li><a href={{route('categorieslist')}}>Tags List</a></li>
-									</ul>
-								</li>
+            <!-- Tags Section -->
+            <li>
+                <a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('addCategory') }}">Add Tag</a></li>
+                    <li><a href="{{ route('categorieslist') }}">Tags List</a></li>
+                </ul>
+            </li>
 
-								<!-- Items Section -->
-								<li><a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('additem')}}>Add Item</a></li>
-										<li><a href={{route('items')}}>Items List</a></li>
-									</ul>
-								</li>
+            <!-- Items Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('additem') }}">Add Item</a></li>
+                    <li><a href="{{ route('items') }}">Items List</a></li>
+                </ul>
+            </li>
 
-								<!-- Books Section (New Section) -->
-								<li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('booklist')}}>Books List</a></li>
+            <!-- Books Section -->
+            <li>
+                <a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('booklist') }}">Books List</a></li>
+                </ul>
+            </li>
 
-									</ul>
-								</li>
-							</ul>
-						</div>
-					  </div>
-					<!-- /sidebar menu -->
+            <!-- Orders Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Orders <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('orderlist') }}">Order List</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /sidebar menu -->
+
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
@@ -254,7 +266,16 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form  action="{{route('storeitem')}}"  method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                                    <script>
+                                        document.addEventListener('DOMContentLoaded', function() {
+                                            // تحقق مما إذا كانت هناك رسالة خطأ في الـ session
+                                            @if (session('error'))
+                                                alert("{{ session('error') }}");
+                                            @endif
+                                        });
+                                    </script>
+
+									<form  action="{{route('storeitem')}}"  method="POST" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
 									@csrf
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="Item-date">Item Date <span class="required">*</span>
@@ -274,7 +295,7 @@
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="license">License <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<textarea id="content" name="licence" required="required" class="form-control">License</textarea>
+												<input id="content" name="licence" required="required" class="form-control">
 											</div>
 										</div>
 										<div class="item form-group">
@@ -286,7 +307,7 @@
                                         <div class="item form-group">
                                             <label for="dimension" class="col-form-label col-md-3 col-sm-3 label-align">Price <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 ">
-                                                <input id="dimension" class="form-control" type="price" name="price" required="required">
+                                                <input id="price" class="form-control" type="price" name="price" required="required">
                                             </div>
                                         </div>
 										<div class="item form-group">
@@ -303,14 +324,13 @@
 												</label>
 											</div>
 										</div>
-										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image <span class="required">*</span>
-											</label>
-											<div class="col-md-6 col-sm-6 ">
-												<input type="file" id="image" name="image"  class="form-control">
-											</div>
-										</div>
-
+                                        <div class="item form-group">
+                                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Image <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6">
+                                                <input type="file" name="image" >
+                                                <small class="form-text text-muted">Upload an image file (JPEG, PNG, JPG, GIF) - Max size: 2MB.</small>
+                                            </div>
+                                        </div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="title">Tag <span class="required">*</span>
 											</label>

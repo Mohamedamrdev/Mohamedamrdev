@@ -107,7 +107,7 @@ a:focus {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 .bg-box img {
@@ -1003,5 +1003,39 @@ a:focus {
 
 .footer_section .footer-info p a {
   color: inherit;
+}
+
+
+
+
+.submit-button {
+    background-color: #FFD700; /* لون الزر */
+    color: white; /* لون النص */
+    padding: 0.75rem 1.5rem; /* Padding for size */
+    border: none;
+    border-radius: 8px; /* حواف مستديرة */
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.submit-button :active{
+    background-color: #fcb40c; /* لون الخلفية عند الضغط */
+    box-shadow: 0 2px #666;
+    transform: translateY(10px); /* لتأثير الضغط */
+}
+
+.submit-button:hover {
+    background-color: #FFB300; /* لون أغمق عند التحويم */
+}
+
+.submit-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+.submit-button span {
+    font-weight: 500;
 }
 /*# sourceMappingURL=style.css.map */

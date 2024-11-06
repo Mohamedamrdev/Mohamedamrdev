@@ -13,6 +13,8 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <title> Feane </title>
 
     <!-- bootstrap core css -->
@@ -27,7 +29,7 @@
         integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
         crossorigin="anonymous" />
     <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
@@ -50,14 +52,10 @@
                         <span>
                             Feane
                         </span>
+                        <a class="navbar-brand" id="usernameDropdown" class="px-3 py-2 rounded-md" style="color: rgb(216, 174, 19);">
+                            {{ Auth::user()->name }}
+                        </a>
                     </a>
-
-                    <a href=""
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    {{-- Dashboard --}}
-                                    {{ Auth::user()->name }}
-                                </a>
-
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -81,10 +79,10 @@
                             </li>
                         </ul>
                         <div class="user_option">
-                            <a href="" class="user_link">
+                            <a href={{route('profile')}} class="user_link" title="Profile">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
-                            <a class="cart_link" href="{{ route('card') }}">
+                            <a class="cart_link" href="{{ route('cart') }}">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;"
@@ -214,13 +212,13 @@
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 <span>
-                                    Call +01 1234567890
+                                    Call +01 142955698
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 <span>
-                                    demo@gmail.com
+                                    mohamedamr.dev@gmail.com
                                 </span>
                             </a>
                         </div>
@@ -235,45 +233,54 @@
                             Necessary, making this the first true generator on the Internet. It uses a dictionary of
                             over 200 Latin words, combined with
                         </p>
+
                         <div class="footer_social">
-                            <a href="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            <a href="https://www.twitter.com" target="_blank">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <a href="https://www.linkedin.com" target="_blank">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            <a href="https://www.instagram.com" target="_blank">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                            </a>
-                        </div>
+
+                        <style>
+                            .fa {
+                                display: inline-block;
+                                font: normal normal normal 14px / 1 FontAwesome;
+                                font-size: inherit;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                            }
+                        </style>
                     </div>
                 </div>
-                <div class="col-md-4 footer-col">
-                    <h4>
-                        Opening Hours
-                    </h4>
-                    <p>
-                        Everyday
-                    </p>
-                    <p>
-                        10.00 Am -10.00 Pm
-                    </p>
-                </div>
             </div>
-            <div class="footer-info">
+            <div class="col-md-4 footer-col">
+                <h4>
+                    Opening Hours
+                </h4>
                 <p>
-                    &copy; <span id="displayYear"></span> All Rights Reserved By
-                    <a href="https://html.design/">Free Html Templates</a><br><br>
-                    &copy; <span id="displayYear"></span> Distributed By
-                    <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                    Everyday
+                </p>
+                <p>
+                    10.00 Am -10.00 Pm
                 </p>
             </div>
+        </div>
+        <div class="footer-info">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://html.design/">Mohamed amr</a><br><br>
+                &copy; <span id="displayYear"></span> Distributed By
+                <a href="https://themewagon.com/" target="_blank">Mohamed amr</a>
+            </p>
+        </div>
         </div>
     </footer>
     <!-- footer section -->
@@ -298,7 +305,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
     </script>
     <!-- End Google Map -->
-
 </body>
 
 </html>

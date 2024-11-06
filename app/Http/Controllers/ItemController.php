@@ -2,44 +2,88 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreItemRequest;
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Tag;
+
 class ItemController extends Controller
+
 {
-
-    public function store(Request $Request)
+    public function store(StoreItemRequest $request)
     {
+        // dd($request->all());
+        $validatedData = $request->validated();
 
-        $validatedData = $Request->validate([
-            'item_date' => 'required',
-            'title' => 'required|string',
-            'licence' => 'required|string',
-            'dimension' => 'required|string',
-            'price' => 'required|integer',
-            'format' => 'nullable',
-            'active'=>'nullable|boolean',
-            'tag_id' =>'required' ,
-        ]);
-        $item = new Item;
-        $item->item_date = $validatedData['item_date'];
-        $item->title = $validatedData['title'];
-        $item->licence = $validatedData['licence'];
-        $item->dimension = $validatedData['dimension'];
-        $item->price = $validatedData['price'];
-        $item->format = $validatedData['format'];
-        $item->active = $Request->has('active') ? 1 : 0;
-        $item->tag_id = $validatedData['tag_id'];
-        // dd($validatedData['tag_id']);
-        // dd($item);/
+        $item=Item::create($validatedData);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+            $item->image = $imagePath; // استخدم مسار الصورة المخزنة
+        } else {
+            $item->image = null; // إذا لم تكن هناك صورة، تعيين القيمة إلى null
+        }
+
+        // حفظ العنصر في قاعدة البيانات
         $item->save();
-    // dd('$item');
 
-    return "success";
+        return redirect()->route('items')->with('success', 'تم تسجيل البيانات بنجاح!');
+    }
 
-    //     return response()->json([
-    //         'success' => true,
-    //         'message' => 'Item created successfully',
-    //         'data' => $item,
-    //     ], 201);
+    public function edit($id)
+    {
+        $item = Item::findOrFail($id); // استرجاع العنصر بناءً على المعرف
+        $tags = Tag::all(); // استرجاع جميع العلامات
+        return view('items.editItem', compact('item', 'tags')); // تمرير المتغيرات إلى العرض
+    }
+
+    public function update(StoreItemRequest $request, $id)
+    {
+        // dd($request->all());
+        $item = Item::findOrFail($id);
+
+        // تحقق من صحة البيانات
+        $validatedData = $request->validated();
+        $item->update($validatedData);
+        if ($request->hasFile('image')) {
+            // تخزين الصورة
+            $imagePath = $request->file('image')->store('images', 'public');
+            $item->image = $imagePath;
+        }
+
+        $item->save();
+
+        return redirect()->route('items')->with('success', 'Item updated successfully.');
+    }
+
+
+    public function destroy($id)
+{
+    $item = Item::find($id);
+    if ($item) {
+        $item->delete(); // هذا سيتحقق من وجود العنصر ويحذفه بشكل ناعم
+        return redirect()->route('items')->with('success', 'Item deleted successfully.');
+    }
+    return redirect()->route('items')->with('error', 'Item not found.');
 }
+
+public function restore($id)
+{
+    $item = Item::withTrashed()->find($id);
+    if ($item) {
+        $item->restore(); // استعادة العنصر
+        return redirect()->route('item.index')->with('success', 'Item restored successfully.');
+    }
+    return redirect()->route('item.index')->with('error', 'Item not found.');
 }
+
+public function trashedItems()
+{
+    $deletedItems = Item::onlyTrashed()->get(); // الحصول على العناصر المحذوفة
+    return view('items.trashed', compact('deletedItems')); // عرض العناصر المحذوفة
+}
+
+
+}
+
+

@@ -44,7 +44,7 @@
 					<div class="clearfix"></div>
 
 					<!-- menu profile quick info -->
-					<div class="profile clearfix">
+					<div class="clearfix profile">
 						<div class="profile_pic">
 							<img src="images/img.jpg" alt="..." class="img-circle profile_img">
 						</div>
@@ -57,45 +57,58 @@
 
 					<br />
 
-					<!-- sidebar menu -->
-					<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-						<div class="menu_section">
-							<h3>General</h3>
-							<ul class="nav side-menu">
-								<!-- Users Section -->
-								<li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('userlist')}}>Users List</a></li>
-										<li><a href={{route('adduser')}}>Add User</a></li>
-									</ul>
-								</li>
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <!-- Users Section -->
+            <li>
+                <a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('userlist') }}">Users List</a></li>
+                    <li><a href="{{ route('adduser') }}">Add User</a></li>
+                </ul>
+            </li>
 
-								<!-- Tags Section -->
-								<li><a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('addCategory')}}>Add Tag</a></li>
-										<li><a href={{route('categorieslist')}}>Tags List</a></li>
-									</ul>
-								</li>
+            <!-- Tags Section -->
+            <li>
+                <a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('addCategory') }}">Add Tag</a></li>
+                    <li><a href="{{ route('categorieslist') }}">Tags List</a></li>
+                </ul>
+            </li>
 
-								<!-- Items Section -->
-								<li><a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										<li><a href={{route('additem')}}>Add Item</a></li>
-										<li><a href={{route('items')}}>Items List</a></li>
-									</ul>
-								</li>
+            <!-- Items Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('additem') }}">Add Item</a></li>
+                    <li><a href="{{ route('items') }}">Items List</a></li>
+                </ul>
+            </li>
 
-								<!-- Books Section (New Section) -->
-								<li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
-									<ul class="nav child_menu">
-										 <li><a href={{route('booklist')}}>Books List</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-					  </div>
-					<!-- /sidebar menu -->
+            <!-- Books Section -->
+            <li>
+                <a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('booklist') }}">Books List</a></li>
+                </ul>
+            </li>
+
+            <!-- Orders Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Orders <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('orderlist') }}">Order List</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /sidebar menu -->
+
 
 					<!-- /menu footer buttons -->
 					<div class="sidebar-footer hidden-small">
@@ -218,7 +231,7 @@
 						</div>
 
 						<div class="title_right">
-							<div class="col-md-5 col-sm-5  form-group pull-right top_search">
+							<div class="col-md-5 col-sm-5 form-group pull-right top_search">
 								<div class="input-group">
 									<input type="text" class="form-control" placeholder="Search for...">
 									<span class="input-group-btn">
@@ -253,40 +266,72 @@
 								</div>
 								<div class="x_content">
 									<br />
-									<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action={{route('user.update',$user->id)}} method="POST">
-                                    @csrf
-                                    @method('PUT')
-										<div class="item form-group">
+                                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ route('user.update', $user) }}" method="POST">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Full Name <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="text" id="first-name" value="{{ old('name', $user->name) }}" required="required" class="form-control ">
+												<input type="text" id="first-name" name="fullname" value="{{old('fullname',$user->fullname)}}" required="required" class="form-control ">
 											</div>
 										</div>
+
 										<div class="item form-group">
-											<label class="col-form-label col-md-3 col-sm-3 label-align" for="user-name">Email <span class="required">*</span>
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">Name <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="email" id="email" value="{{ old('email', $user->email) }}" name="email" required="required" class="form-control">
+												<input type="text" id="first-name" name="name" value="{{old('name',$user->name)}}" required="required" class="form-control ">
+											</div>
+										</div>
+
+										<div class="item form-group">
+											<label class="col-form-label col-md-3 col-sm-3 label-align" for="user-name">Username <span class="required">*</span>
+											</label>
+											<div class="col-md-6 col-sm-6 ">
+												<input type="text" id="user-name" name="username" value="{{old('username',$user->username)}}" required="required" class="form-control">
 											</div>
 										</div>
 										<div class="item form-group">
-                                            <label for="username" class="col-form-label col-md-3 col-sm-3 label-align">Username <span class="required">*</span></label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input id="username" class="form-control" value="{{ old('user-name', $user->username) }}" type="text" name="user-name" required="required">
+											<label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email <span class="required">*</span></label>
+											<div class="col-md-6 col-sm-6 ">
+												<input id="email" class="form-control" type="email" name="email" value="{{old('email',$user->email)}}" required="required">
+											</div>
+										</div>
+
+                                        <div class="item form-group">
+											<label for="role" class="col-form-label col-md-3 col-sm-3 label-align">Role <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                    <select name="role" id="role"  class="form-control">
+                                                        <option value="user" {{ old('role', $user->role) == 'user' ? 'selected' : '' }}>User</option>
+                                                        <option value="admin" {{ old('role', $user->role) == 'admin' ? 'selected' : '' }}>Admin</option>
+                                                    </select>
                                             </div>
                                         </div>
+
+                                        <div class="item form-group">
+                                            <label for="phone_number" class="col-form-label col-md-3 col-sm-3 label-align">Phone Number</label>
+                                            <div class="col-md-6 col-sm-6 ">
+                                                        <input type="tel" id="phone_number" name="phone_number" value="{{old('phone_number',$user->phone_number)}}" required class="w-full p-2 mt-1 border border-gray-300 rounded" value="{{ old('phone_number') }}">
+                                                        @error('phone_number')
+                                                            <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
+                                                        @enderror
+                                                    </div>
+                                                    </div>
+
 										<div class="item form-group">
-                                            <label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
-                                            <div class="col-md-6 col-sm-6">
-                                                <input type="checkbox" class="flat" name="active" {{ old('active', $user->active) ? 'checked' : '' }}>
-                                            </div>
-                                        </div>
+											<label class="col-form-label col-md-3 col-sm-3 label-align">Active</label>
+											<div class="checkbox">
+												<label>
+													<input name="active" value="1" type="checkbox"  class="flat">
+												</label>
+											</div>
+										</div>
 										<div class="item form-group">
 											<label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span class="required">*</span>
 											</label>
 											<div class="col-md-6 col-sm-6 ">
-												<input type="password" value="{{old('password'),$user->password}}" id="password" name="password" required="required" class="form-control">
+												<input type="password" id="password" name="password" value="{{old('password',$user->password)}}" required="required" class="form-control">
 											</div>
 										</div>
 										<div class="ln_solid"></div>
@@ -311,9 +356,6 @@
 
 			<!-- footer content -->
 			<footer>
-				<div class="pull-right">
-					Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-				</div>
 				<div class="clearfix"></div>
 			</footer>
 			<!-- /footer content -->

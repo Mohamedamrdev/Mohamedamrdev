@@ -42,7 +42,7 @@
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
-            <div class="profile clearfix">
+            <div class="clearfix profile">
               <div class="profile_pic">
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img">
               </div>
@@ -55,46 +55,58 @@
 
             <br />
 
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                  <h3>General</h3>
-                  <ul class="nav side-menu">
-                      <!-- Users Section -->
-                      <li><a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                              <li><a href={{route('userlist')}}>Users List</a></li>
-                              <li><a href={{route('adduser')}}>Add User</a></li>
-                          </ul>
-                      </li>
+<!-- sidebar menu -->
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <!-- Users Section -->
+            <li>
+                <a><i class="fa fa-users"></i> Users <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('userlist') }}">Users List</a></li>
+                    <li><a href="{{ route('adduser') }}">Add User</a></li>
+                </ul>
+            </li>
 
-                      <!-- Tags Section -->
-                      <li><a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                              <li><a href={{route('addCategory')}}>Add Tag</a></li>
-                              <li><a href={{route('categorieslist')}}>Tags List</a></li>
-                          </ul>
-                      </li>
+            <!-- Tags Section -->
+            <li>
+                <a><i class="fa fa-edit"></i> Tags <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('addCategory') }}">Add Tag</a></li>
+                    <li><a href="{{ route('categorieslist') }}">Tags List</a></li>
+                </ul>
+            </li>
 
-                      <!-- Items Section -->
-                      <li><a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                              <li><a href={{route('additem')}}>Add Item</a></li>
-                              <li><a href={{route('items')}}>Items List</a></li>
-                          </ul>
-                      </li>
+            <!-- Items Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Items <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('additem') }}">Add Item</a></li>
+                    <li><a href="{{ route('items') }}">Items List</a></li>
+                </ul>
+            </li>
 
-                      <!-- Books Section (New Section) -->
-                      <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li><a href={{route('booklist')}}>Books List</a></li>
+            <!-- Books Section -->
+            <li>
+                <a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('booklist') }}">Books List</a></li>
+                </ul>
+            </li>
 
-                          </ul>
-                      </li>
-                  </ul>
-              </div>
-            </div>
-					<!-- /sidebar menu -->
+            <!-- Orders Section -->
+            <li>
+                <a><i class="fa fa-desktop"></i> Orders <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{ route('orderlist') }}">Order List</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- /sidebar menu -->
+
 
             <!-- /menu footer buttons -->
             <div class="sidebar-footer hidden-small">
@@ -141,45 +153,9 @@
                   <li role="presentation" class="nav-item dropdown open">
                     <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
                       <i class="fa fa-envelope-o"></i>
-                      <span class="badge bg-green">6</span>
+                      <span class="badge bg-green">2</span>
                     </a>
                     <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="dropdown-item">
-                          <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                          <span>
-                            <span>John Smith</span>
-                            <span class="time">3 mins ago</span>
-                          </span>
-                          <span class="message">
-                            Film festivals used to be do-or-die moments for movie makers. They were where...
-                          </span>
-                        </a>
-                      </li>
                       <li class="nav-item">
                         <a class="dropdown-item">
                           <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
@@ -214,22 +190,21 @@
             <div class="page-title">
               <div class="title_left">
                 <h3>Manage Books</h3>
-              </div>
+            </div>
 
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-secondary" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <!-- filter by date  -->
+            <div class="filter-section">
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate">
+
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate">
+
+                <button onclick="filterByDate()">Filter</button>
+                <button onclick="resetFilter()">Reset Filter</button>
             </div>
 
             <div class="clearfix"></div>
-
             <div class="row">
               <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
@@ -274,15 +249,17 @@
                           <td>{{$book->email}}</td>
                           <td>{{$book->phone_number}}</td>
                           <td>{{$book->how_many}}</td>
-                          {{-- <td><img src="./images/edit.png" alt="Edit"></td>
+                          {{-- <td><img src=src="{{asset('images/delete.png')}}" alt="Edit"></td>
                           <td><img src="./images/delete.png" alt="Delete"></td> --}}
+                          <div>
+                        </div>
                         </tr>
                         @endforeach
                         {{-- <tr>
                           <td>1 Jan 2023</td>
                           <td>Title</td>
                           <td>Yes</td>
-                          <td><img src="./images/edit.png" alt="Edit"></td>
+                          <td><img src=src="{{asset('images/delete.png')}}" alt="Edit"></td>
                           <td><img src="./images/delete.png" alt="Delete"></td>
                         </tr> --}}
                       </tbody>
@@ -301,7 +278,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <a href="https://colorlib.com"></a>
           </div>
           <div class="clearfix"></div>
         </footer>
@@ -339,5 +316,56 @@
     <!-- Custom Theme Scripts -->
     <script src="build/js/custom.min.js"></script>
 
-  </body>
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            const table = $('#datatable').DataTable();
+
+            // Custom filter function
+            function filterByDate() {
+                const startDate = document.getElementById("startDate").value;
+                const endDate = document.getElementById("endDate").value;
+
+                // Clear any existing search
+                table.search('').draw();
+
+                // Filter by date range
+                $.fn.dataTable.ext.search.push(
+                    function(settings, data, dataIndex) {
+                        const date = new Date(data[0]); // Assuming the date is in the first column
+
+                        if (!isNaN(date)) {
+                            return (!startDate || date >= new Date(startDate)) &&
+                                   (!endDate || date <= new Date(endDate));
+                        }
+                        return false;
+                    }
+                );
+
+                // Redraw the table with the new filters
+                table.draw();
+            }
+
+            // Attach filter function to the filter button
+            document.querySelector('button').addEventListener('click', filterByDate);
+
+            // Reset filter function
+            function resetFilter() {
+                // Clear the date inputs
+                document.getElementById("startDate").value = "";
+                document.getElementById("endDate").value = "";
+
+                // Remove any existing filters
+                $.fn.dataTable.ext.search = []; // Clear the search filters
+
+                // Redraw the table to show all data
+                table.draw();
+            }
+
+            // Attach reset function to the reset button
+            document.querySelectorAll('.filter-section button')[1].addEventListener('click', resetFilter); // Assuming the reset button is the second button in the filter section
+        });
+        </script>
+
+</body>
 </html>

@@ -13,6 +13,8 @@
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="image/png">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
     <title> Feane </title>
 
     <!-- Bootstrap core CSS -->
@@ -27,12 +29,15 @@
         integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
         crossorigin="anonymous" />
     <!-- Font Awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
     <!-- Responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href={{asset("css/menu.css")}}>
+
+
 
 </head>
 
@@ -45,12 +50,16 @@
         <!-- Header section starts -->
         <header class="header_section">
             <div class="container">
-                <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="{{ route('index') }}">
-                        <span>
-                            Feane
-                        </span>
-                    </a>
+                    <nav class="navbar navbar-expand-lg custom_nav-container ">
+                        <a class="navbar-brand" href="{{ route('index') }}">
+                            <span>
+                                Feane
+                            </span>
+                            <a class="navbar-brand" id="usernameDropdown" class="px-3 py-2 rounded-md" style="color: rgb(216, 174, 19);">
+                                {{ Auth::user()->name }}
+                            </a>
+                        </a>
+
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -75,10 +84,10 @@
                             </li>
                         </ul>
                         <div class="user_option">
-                            <a href="#" class="user_link">
+                            <a href={{route('profile')}} class="user_link" title="Profile">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
-                            <a class="cart_link" href="{{ route('card') }}">
+                            <a class="cart_link" href="{{ route('cart') }}">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;"
@@ -144,26 +153,33 @@
                             <div class="box">
                                 <div>
                                     <div class="img-box">
-                                        <img src="{{ asset('images/' . $item->image) }}" alt="">
+                                        <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}">
                                     </div>
                                     <div class="detail-box">
                                         <h5>{{ $item->title }}</h5>
                                         <p>{{ $item->dimension }}</p>
                                         <div class="options">
                                             <h6>${{ $item->price }}</h6>
-                                            <form action="{{route('cart.add')}}" method="POST">
+                                            <form action="{{ route('cart.add') }}" method="POST">
                                                 @csrf
                                                 <input type="hidden" name="item_id" value="{{ $item->id }}">
                                                 <input type="hidden" name="title" value="{{ $item->title }}">
                                                 <input type="hidden" name="price" value="{{ $item->price }}">
-                                                <input type="number" name="quantity" value="1" min="1">
-                                                <button type="submit" class="flex items-center justify-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8">
+                                                <div class="quantity-decrease1">
+                                                    <button type="button" class="quantity-decrease">-</button>
+                                                    <input  type="number" name="quantity" class="quantity-input" value="1" min="1"  >
+                                                    <button type="button" class="quantity-increase">+</button>
+
+                                                </div>
+
+                                                <button type="submit" class="flex items-center justify-center submit-button">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
                                                         <circle cx="9" cy="21" r="1"></circle>
                                                         <circle cx="20" cy="21" r="1"></circle>
                                                         <path d="M2 2h4l1 7h11l1-7h4"></path>
                                                         <path d="M5 8h14l-1.5 6H6.5L5 8z"></path>
                                                     </svg>
+                                                    <span class="ml-2">Add to Cart</span>
                                                 </button>
                                             </form>
                                         </div>
@@ -183,92 +199,119 @@
         </div>
     </section>
 
-    <!-- Footer section -->
+
+    <!-- footer section -->
     <footer class="footer_section">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 footer-col">
-                    <h4>Contact Us</h4>
-                    <div class="contact_link_box">
-                        <a href="">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <span>Location</span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <span>Call +01 1234567890</span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <span>demo@gmail.com</span>
-                        </a>
+                    <div class="footer_contact">
+                        <h4>
+                            Contact Us
+                        </h4>
+                        <div class="contact_link_box">
+                            <a href="">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <span>
+                                    Location
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                <span>
+                                    Call +01 142955698
+                                </span>
+                            </a>
+                            <a href="">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                <span>
+                                    mohamedamr.dev@gmail.com
+                                </span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 footer-col">
-                    <a href="#" class="footer-logo">Feane</a>
-                    <p>Necessary, making this the first true generator on the Internet...</p>
-                    <div class="footer_social">
-                        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+                    <div class="footer_detail">
+                        <a href="" class="footer-logo">
+                            Feane
+                        </a>
+                        <p>
+                            Necessary, making this the first true generator on the Internet. It uses a dictionary of
+                            over 200 Latin words, combined with
+                        </p>
+
+                        <div class="footer_social">
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.twitter.com" target="_blank">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.linkedin.com" target="_blank">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.instagram.com" target="_blank">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+
+                        <style>
+                            .fa {
+                                display: inline-block;
+                                font: normal normal normal 14px / 1 FontAwesome;
+                                font-size: inherit;
+                                text-rendering: auto;
+                                -webkit-font-smoothing: antialiased;
+                                -moz-osx-font-smoothing: grayscale;
+                            }
+                        </style>
                     </div>
-                </div>
-                <div class="col-md-4 footer-col">
-                    <h4>Opening Hours</h4>
-                    <p>Everyday</p>
-                    <p>10.00 Am -10.00 Pm</p>
                 </div>
             </div>
-            <div class="footer-info">
-                <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a
-                        href="https://html.design/">Free Html Templates</a><br><br>
-                    &copy; <span id="displayYear"></span> Distributed By <a
-                        href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+            <div class="col-md-4 footer-col">
+                <h4>
+                    Opening Hours
+                </h4>
+                <p>
+                    Everyday
+                </p>
+                <p>
+                    10.00 Am -10.00 Pm
                 </p>
             </div>
         </div>
+        <div class="footer-info">
+            <p>
+                &copy; <span id="displayYear"></span> All Rights Reserved By
+                <a href="https://html.design/">Mohamed amr</a><br><br>
+                &copy; <span id="displayYear"></span> Distributed By
+                <a href="https://themewagon.com/" target="_blank">Mohamed amr</a>
+            </p>
+        </div>
+        </div>
     </footer>
+    <!-- footer section -->
 
-    <!-- إضافة jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            // عند الضغط على عنصر في قائمة التصفية
-            $('.filters_menu li').on('click', function() {
-                var filterValue = $(this).attr('data-filter');
-                // تغيير الفئة النشطة
-                $('.filters_menu li').removeClass('active');
-                $(this).addClass('active');
-
-                // تصفية العناصر
-                $('.grid .col-sm-6').hide(); // إخفاء جميع العناصر
-                if (filterValue === '*') {
-                    $('.grid .col-sm-6').show(); // إظهار جميع العناصر إذا تم اختيار "كل"
-                } else {
-                    $('.grid .col-sm-6' + filterValue).show(); // إظهار العناصر التي تطابق الفئة المختارة
-                }
-            });
-        });
-    </script>
-
-
-
-    <!-- jQuery -->
+    <!-- jQery -->
     <script src="js/jquery-3.4.1.min.js"></script>
-    <!-- Popper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <!-- Bootstrap JS -->
+    <!-- popper js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <!-- bootstrap js -->
     <script src="js/bootstrap.js"></script>
-    <!-- Owl carousel JS -->
+    <!-- owl slider -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <!-- Isotope JS -->
+    <!-- isotope js -->
     <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
-    <!-- Nice select JS -->
+    <!-- nice select -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
-    <!-- Custom JS -->
+    <!-- custom js -->
     <script src="js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+    </script>
+    <!-- End Google Map -->
 
 </body>
 

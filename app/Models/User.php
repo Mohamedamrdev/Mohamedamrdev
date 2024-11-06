@@ -23,8 +23,9 @@ class User extends Authenticatable
         'username',
         'name',
         'email',
+        'phone_number',
         'password',
-        
+
     ];
 
     /**
@@ -49,4 +50,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // تأكد من أن العلاقة معرفة بشكل صحيح
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id'); 
+    }
 }
+
+
+

@@ -16,9 +16,9 @@
 
                     {{ __('You are logged in!') }}
                     <br>
-                    {{-- <a href={{route('userlist')}}>Click to dashboard</a> --}}
+                    <a href={{route('userlist')}}>Click to dashboard</a>
                     <br>
-                    <a href={{route('index')}}>Click to view web site</a>
+                    {{-- <a href={{route('index')}}>Click to view web site</a> --}}
                 </div>
             </div>
         </div>

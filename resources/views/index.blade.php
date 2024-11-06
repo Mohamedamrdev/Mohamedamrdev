@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <head>
@@ -12,6 +13,8 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <link rel="shortcut icon" href="images/favicon.png" type="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <title> Feane </title>
 
@@ -27,12 +30,13 @@
         integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
         crossorigin="anonymous" />
     <!-- font awesome style -->
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet" />
     <!-- responsive style -->
     <link href="css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href={{ asset('css/indix.css') }}>
 
 </head>
 
@@ -55,24 +59,42 @@
                     @if (Route::has('login'))
                         <nav class="flex justify-end flex-1 -mx-3">
                             @auth
-                                <a href=""
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    {{-- Dashboard --}}
-                                    {{ Auth::user()->name }}
-                                </a>
-                            @else
-                                <a href="{{ route('login') }}"
-                                    class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                    Log in
-                                </a>
 
-                                @if (Route::has('register'))
-                                    <a href="{{ route('register') }}"
-                                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
-                                        Register
+                                {{-- Dashboard --}}
+                                {{-- {{ Auth::user()->name }} --}}
+                                <a class="navbar navbar-expand-lg custom_nav-container ">
+                                    <a class="nav-link dropdown-toggle"
+                                        style="color: rgb(216, 174, 19); , font-family: 'Arial', sans-serif;""
+                                        href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        {{ Auth::user()->name }}
                                     </a>
-                                @endif
-                            @endauth
+                                    <div class="dropdown-menu dropdown-menu-end dropdown" aria-labelledby="navbarDropdown"
+                                        id="navbarNav">
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                    <a>
+                                    </a>
+                                @else
+                                    <a href="{{ route('login') }}" class="px-3 py-2 rounded-md"
+                                        style="color: rgb(216, 174, 19);">
+                                        Log in
+                                    </a>
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="px-3 py-2 rounded-md"
+                                            style="color: rgb(216, 174, 19);">
+                                            Register
+                                        </a>
+                                    @endif
+                                @endauth
                         </nav>
                     @endif
 
@@ -99,10 +121,11 @@
                             </li>
                         </ul>
                         <div class="user_option">
-                            <a href="" class="user_link">
+                            <a href={{ route('profile') }} class="user_link" title="Profile">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
-                            <a class="cart_link" href="{{ route('card') }}">
+
+                            <a class="cart_link" href="{{ route('cart') }}">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;"
@@ -110,21 +133,21 @@
                                     <g>
                                         <g>
                                             <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                   c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                    c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
                                         </g>
                                     </g>
                                     <g>
                                         <g>
                                             <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                   C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                   c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                   C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                    C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                    c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                    C457.728,97.71,450.56,86.958,439.296,84.91z" />
                                         </g>
                                     </g>
                                     <g>
                                         <g>
                                             <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                   c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                    c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
                                         </g>
                                     </g>
                                     <g>
@@ -164,103 +187,130 @@
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
                             </form>
-                            <a href={{route('order')}} class="order_online">
+                            <a href={{ route('order') }} class="order_online">
                                 Order Online
                             </a>
                         </div>
                     </div>
                 </nav>
             </div>
-        </header>
-        <!-- end header section -->
-        <!-- slider section -->
-        <section class="slider_section ">
-            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Fast Food Restaurant
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
-                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
+            <div class="user_option">
+                <a href="" class="user_link"><i class="fa fa-user" aria-hidden="true"></i></a>
+                <a class="cart_link" href="{{ route('cart') }}">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
+                <form class="form-inline">
+                    <button class="my-2 btn my-sm-0 nav_search-btn" type="submit">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <a href="{{ route('order') }}" class="order_online">Order Online</a>
+            </div>
+    </div>
+
+    </nav>
+    </div>
+    </header>
+    <!-- end header section -->
+
+    <!-- slider section -->
+    <section class="slider_section ">
+        <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="container ">
+                        <div class="row">
+                            <div class="col-md-7 col-lg-6 ">
+                                <div class="detail-box">
+                                    <h1>
+                                        Fast Food Restaurant
+                                    </h1>
+                                    <p>
+                                        Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
+                                        mollitia laborum quam quisquam esse error unde. Tempora ex doloremque, labore,
+                                        sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
+                                    </p>
+                                    <div class="btn-box">
+                                        <a href="" class="btn1">
+                                            Order Now
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="carousel-item ">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Fast Food Restaurant
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
-                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container ">
-                            <div class="row">
-                                <div class="col-md-7 col-lg-6 ">
-                                    <div class="detail-box">
-                                        <h1>
-                                            Fast Food Restaurant
-                                        </h1>
-                                        <p>
-                                            Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad
-                                            mollitia laborum quam quisquam esse error unde. Tempora ex doloremque,
-                                            labore, sunt repellat dolore, iste magni quos nihil ducimus libero ipsam.
-                                        </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <ol class="carousel-indicators">
-                        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-                        <li data-target="#customCarousel1" data-slide-to="1"></li>
-                        <li data-target="#customCarousel1" data-slide-to="2"></li>
-                    </ol>
                 </div>
             </div>
+        </div>
 
-        </section>
-        <!-- end slider section -->
+        <div class="carousel-item ">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-7 col-lg-6 ">
+                        <div class="detail-box">
+                            <h1>
+                                Fast Food Restaurant
+                            </h1>
+                            <p>
+                                Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia
+                                laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat
+                                dolore, iste magni quos nihil ducimus libero ipsam.
+                            </p>
+                            <div class="btn-box">
+                                <a href="" class="btn1">
+                                    Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-7 col-lg-6 ">
+                        <div class="detail-box">
+                            <h1>
+                                Fast Food Restaurant
+                            </h1>
+                            <p>
+                                Doloremque, itaque aperiam facilis rerum, commodi, temporibus sapiente ad mollitia
+                                laborum quam quisquam esse error unde. Tempora ex doloremque, labore, sunt repellat
+                                dolore, iste magni quos nihil ducimus libero ipsam.
+                            </p>
+                            <div class="btn-box">
+                                <a href="" class="btn1">
+                                    Order Now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+        <div class="container">
+            <ol class="carousel-indicators">
+                <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                <li data-target="#customCarousel1" data-slide-to="1"></li>
+                <li data-target="#customCarousel1" data-slide-to="2"></li>
+            </ol>
+        </div>
+
+        </div>
+
+
+
+    </section>
+    <!-- end slider section -->
     </div>
 
     <!-- offer section -->
+
 
     <section class="offer_section layout_padding-bottom">
         <div class="offer_container">
@@ -286,21 +336,22 @@
                                         <g>
                                             <g>
                                                 <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                     c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                            c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
                                             </g>
                                         </g>
                                         <g>
                                             <g>
                                                 <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                     C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                     c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                     C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                            C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                            c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                            C457.728,97.71,450.56,86.958,439.296,84.91z" />
                                             </g>
                                         </g>
                                         <g>
                                             <g>
-                                                <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                                                <path
+                                                    d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                            c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
                                             </g>
                                         </g>
                                         <g>
@@ -358,21 +409,22 @@
                                         <g>
                                             <g>
                                                 <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
-                                                c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                            c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
                                             </g>
                                         </g>
                                         <g>
                                             <g>
                                                 <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
-                     C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
-                     c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
-                     C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                            C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                            c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                            C457.728,97.71,450.56,86.958,439.296,84.91z" />
                                             </g>
                                         </g>
                                         <g>
                                             <g>
-                                                <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
-                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                                                <path
+                                                    d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                         c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
                                             </g>
                                         </g>
                                         <g>
@@ -414,7 +466,6 @@
             </div>
         </div>
     </section>
-
     <!-- end offer section -->
 
     <!-- food section -->
@@ -433,7 +484,7 @@
                     <li data-filter=".tag-{{ $tag->id }}">{{ $tag->title }}</li>
                 @endforeach
             </ul> --}}
-{{-- 
+            {{--
             <div class="filters-content">
                 <div class="grid row">
                     @foreach ($items as $item)
@@ -462,64 +513,16 @@
                             </div>
                         </div>
                     @endforeach --}}
-                </div>
-            </div>
+        </div>
+        </div>
 
-            <div class="btn-box">
-                <a href="">
-                    View More
-                </a>
-            </div>
+        <div class="btn-box">
+            <a href="">
+                View More
+            </a>
+        </div>
         </div>
     </section>
-
-    <!-- Footer section -->
-    <footer class="footer_section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 footer-col">
-                    <h4>Contact Us</h4>
-                    <div class="contact_link_box">
-                        <a href="">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                            <span>Location</span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-phone" aria-hidden="true"></i>
-                            <span>Call +01 1234567890</span>
-                        </a>
-                        <a href="">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                            <span>demo@gmail.com</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4 footer-col">
-                    <a href="#" class="footer-logo">Feane</a>
-                    <p>Necessary, making this the first true generator on the Internet...</p>
-                    <div class="footer_social">
-                        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        <a href=""><i class="fa fa-pinterest" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-4 footer-col">
-                    <h4>Opening Hours</h4>
-                    <p>Everyday</p>
-                    <p>10.00 Am -10.00 Pm</p>
-                </div>
-            </div>
-            <div class="footer-info">
-                <p>&copy; <span id="displayYear"></span> All Rights Reserved By <a
-                        href="https://html.design/">Free Html Templates</a><br><br>
-                    &copy; <span id="displayYear"></span> Distributed By <a
-                        href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-                </p>
-            </div>
-        </div>
-    </footer>
 
     <!-- إضافة jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -597,50 +600,55 @@
                     <div class="form_container">
                         <form action="">
                             <div>
-                                <input type="text" class="form-control" placeholder="Your Name" />
+                                <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                    value="{{ Auth::check() ? Auth::user()->name : '' }}" />
                             </div>
                             <div>
-                                <input type="text" class="form-control" placeholder="Phone Number" />
+                                <input type="text" name="phone_number" class="form-control"
+                                    placeholder="Phone Number"
+                                    value="{{ Auth::check() ? Auth::user()->phone_number : '' }}" />
                             </div>
-                            <div>
-                                <input type="email" class="form-control" placeholder="Your Email" />
-                            </div>
-                            <div>
-                                <select class="form-control nice-select wide">
-                                    <option value="" disabled selected>
-                                        How many persons?
-                                    </option>
-                                    <option value="">
-                                        2
-                                    </option>
-                                    <option value="">
-                                        3
-                                    </option>
-                                    <option value="">
-                                        4
-                                    </option>
-                                    <option value="">
-                                        5
-                                    </option>
-                                </select>
-                            </div>
-                            <div>
-                                <input type="date" class="form-control">
-                            </div>
-                            <div class="btn_box">
-                                <button>
-                                    Book Now
-                                </button>
-                            </div>
-                        </form>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="map_container ">
-                        <div id="googleMap"></div>
+                    <div>
+                        <input type="email" name="email" class="form-control" placeholder="Your Email"
+                            value="{{ Auth::check() ? Auth::user()->email : '' }}" />
                     </div>
+                    <div>
+                        <select name="how_many" class="form-control nice-select wide">
+                            <option value="" disabled selected>
+                                How many persons?
+                            </option>
+                            <option value="2">
+                                2
+                            </option>
+                            <option value="3">
+                                3
+                            </option>
+                            <option value="4">
+                                4
+                            </option>
+                            <option value="5">
+                                5
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="date" name="book_date" class="form-control">
+                    </div>
+                    <div class="btn_box">
+                        <button class="book-now-btn">
+                            Book Now
+                        </button>
+                    </div>
+                    </form>
                 </div>
             </div>
+            <div class="col-md-6">
+                <div class="map_container ">
+                    <div id="googleMap"></div>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
     <!-- end book section -->
@@ -720,13 +728,13 @@
                             <a href="">
                                 <i class="fa fa-phone" aria-hidden="true"></i>
                                 <span>
-                                    Call +01 1234567890
+                                    Call +01 142955698
                                 </span>
                             </a>
                             <a href="">
                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                 <span>
-                                    demo@gmail.com
+                                    mohamedamr.dev@gmail.com
                                 </span>
                             </a>
                         </div>
@@ -741,22 +749,31 @@
                             Necessary, making this the first true generator on the Internet. It uses a dictionary of
                             over 200 Latin words, combined with
                         </p>
+
                         <div class="footer_social">
-                            <a href="">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
+                            <a href="https://www.facebook.com" target="_blank">
+                                <i class="fab fa-facebook" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
+                            <a href="https://www.twitter.com" target="_blank">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            <a href="https://www.linkedin.com" target="_blank">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-instagram" aria-hidden="true"></i>
+                            <a href="https://www.instagram.com" target="_blank">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
                             </a>
-                            <a href="">
-                                <i class="fa fa-pinterest" aria-hidden="true"></i>
-                            </a>
+
+                            <style>
+                                .fa {
+                                    display: inline-block;
+                                    font: normal normal normal 14px / 1 FontAwesome;
+                                    font-size: inherit;
+                                    text-rendering: auto;
+                                    -webkit-font-smoothing: antialiased;
+                                    -moz-osx-font-smoothing: grayscale;
+                                }
+                            </style>
                         </div>
                     </div>
                 </div>
@@ -775,9 +792,9 @@
             <div class="footer-info">
                 <p>
                     &copy; <span id="displayYear"></span> All Rights Reserved By
-                    <a href="https://html.design/">Free Html Templates</a><br><br>
+                    <a href="https://html.design/">Mohamed amr</a><br><br>
                     &copy; <span id="displayYear"></span> Distributed By
-                    <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+                    <a href="https://themewagon.com/" target="_blank">Mohamed amr</a>
                 </p>
             </div>
         </div>

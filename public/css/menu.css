@@ -1,0 +1,111 @@
+ /* .quantity-buttons{
+background-color: blueviolet;
+}
+.quantity-decrease     {border: 2px solid #1007bb;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    background-color: transparent;}
+
+
+
+
+
+
+
+
+
+.quantity-increase{border: 2px solid #1007bb;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    background-color: transparent;;
+
+}
+
+
+.quantity-adjust.rounded-outline button {
+    border: 2px solid #1007bb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    background-color: transparent;
+}
+.quantity-adjust.rounded-outline .quantity-input {
+    width: 50px;
+    text-align: center;
+    border: 2px solid #010e3d;
+    border-radius: 5px;
+} */
+
+.quantity-increase{
+    background-color: #333;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 3px;
+}
+.quantity-increase {
+    width: 50px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #333;
+}
+
+
+.quantity-decrease:hover{
+    background-color:#ffbe33;}
+
+
+.quantity-decrease{
+    background-color: #333;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 3px;
+
+
+}
+.quantity-decrease{
+
+    width: 50px;
+    text-align: center;
+    border: none;
+    border-bottom: 2px solid #333;
+}
+.quantity-input{
+    width: 60px;
+    height: 40PX;
+
+
+}
+
+.quantity-increase:hover{
+
+    background-color: #ffbe33;
+
+}
+
+
+.quantity-decrease:active {
+    background-color: #fcb40c; /* لون الخلفية عند الضغط */
+    box-shadow: 0 2px #666;
+    transform: translateY(4px); /* لتأثير الضغط */
+}
+.quantity-increase:active {
+    background-color: #fcb40c; /* لون الخلفية عند الضغط */
+    box-shadow: 0 2px #666;
+    transform: translateY(4px); /* لتأثير الضغط */
+}
+.quantity-decrease1{
+    margin: 10px;
+   display:auto;
+}
+
+
+
